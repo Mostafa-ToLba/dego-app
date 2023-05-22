@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "339840083130",
+    "project_id": "dego-dego",
+    "storage_bucket": "dego-dego.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:339840083130:android:af746989201b9f99b88e83",
+        "android_client_info": {
+          "package_name": "com.dego.dego"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "339840083130-c4ns7cra15hftiadhvc2p970lsn5t4bq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dego.dego",
+            "certificate_hash": "46e6321d0575ddd32827492cd21a0116d6d08560"
+          }
+        },
+        {
+          "client_id": "339840083130-6kbshjh57n17bmnr0aamu9q7sj4b28k2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCWTzjsgKvgsqe6lVwO05fqDbpU-i1J5B0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "339840083130-6kbshjh57n17bmnr0aamu9q7sj4b28k2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
