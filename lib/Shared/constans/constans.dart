@@ -6,6 +6,11 @@ import 'package:hexcolor/hexcolor.dart';
 
 Color color1 = HexColor('F5F5F5');
 Color color2 = HexColor('FE3B75');
+Color color3 = HexColor('#4d4d4d');
+
+
+String engFont = 'BalooPaaji2';
+String arbFont = 'DIN Next LT W23';
 
 MaterialColor createMaterialColor(Color color) {
   List strengths = <double>[.05];
@@ -28,3 +33,18 @@ MaterialColor createMaterialColor(Color color) {
 
   return MaterialColor(color.value, swatch);
 }
+
+
+Future navigateTo(context, Widget) => Navigator.push(
+  context,
+  MaterialPageRoute(
+    builder: (context) => Widget,
+  ),
+);
+
+dynamic navigateAndFinsh(context, dynamic) => Navigator.pushAndRemoveUntil(
+    context,
+    MaterialPageRoute(
+      builder: (context) => dynamic,
+    ),
+        (route) => false);

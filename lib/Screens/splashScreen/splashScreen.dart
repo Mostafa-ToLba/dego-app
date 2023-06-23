@@ -1,80 +1,60 @@
 
 import 'dart:async';
-
+import 'dart:io';
+import 'package:dego/AppCubit/appCubitStates.dart';
 import 'package:dego/LayoutScreen/layoutScreen.dart';
 import 'package:dego/Shared/constans/constans.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:sizer/sizer.dart';
+import '../../AppCubit/appCubit.dart';
 
 class SplashScreen extends StatefulWidget {
-     const SplashScreen({Key? key}) : super(key: key);
-
+      const SplashScreen({Key? key}) : super(key: key);
      @override
      State<SplashScreen> createState() => _SplashScreenState();
    }
-
-   class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderStateMixin {
-     late AnimationController _controller;
-     late Animation<double> _animation;
+   class _SplashScreenState extends State<SplashScreen> {
 
      @override
      void initState() {
        super.initState();
-       _controller = AnimationController(
-         vsync: this,
-         duration: const Duration(seconds: 1),
-       );
-       _animation = Tween<double>(begin: 0, end: 1)
-           .animate(CurvedAnimation(parent: _controller, curve: Curves.easeOut));
-       _controller.forward();
-       Timer(const Duration(seconds: 3),()
-       {
-         Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
-           builder:(context) =>  LayoutScreen(),
-         ), (route) => false);
+         Timer(const Duration(seconds: 2),()
+         {
+           Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
+             builder:(context) =>  const LayoutScreen(),
+           ), (route) => false);
+         });
 
-       });
      }
-
-     @override
-     void dispose() {
-       _controller.dispose();
-       super.dispose();
-     }
-
      @override
      Widget build(BuildContext context) {
-       return AnnotatedRegion<SystemUiOverlayStyle>(
-         value: const SystemUiOverlayStyle(
-           statusBarColor: Colors.transparent,
-           statusBarIconBrightness:  Brightness.dark,
-         ),
-         child: Scaffold(
-           body: ClipRRect(
-             child: Stack(
-               alignment: Alignment.center,
-               children: [
-                 Container(
-                   color: color1,
-                   height: double.infinity,
-                   width:double.infinity ,
-                 ),
-                 Center(
-                   child: Opacity(
-                     opacity: _animation.value,
-                     child: Container(
-                       child: Padding(
-                         padding:  EdgeInsets.only(left: 7.w),
-                         child: Image(image: const AssetImage('assets/images/dego-logo.png',),height:20.h,width: 20.h,),
-                       ),
+       return BlocConsumer<AppCubit,AppCubitStates>(
+         listener: (BuildContext context, state) {  },
+         builder: (BuildContext context, Object? state) {
+           return Scaffold(
+             body: ClipRRect(
+               child: Stack(
+                 alignment: Alignment.center,
+                 children: [
+                   Container(
+                     color: AppCubit.get(context).isDark?Colors.black:color1,
+                     height: double.infinity,
+                     width:double.infinity ,
+                   ),
+                   Center(
+                     child: Padding(
+                       padding:  EdgeInsets.only(left: 7.w),
+                       child: Image(image: const AssetImage('assets/images/dego-logo.png',),height:20.h,width: 20.h,
+                           color:AppCubit.get(context).isDark?Colors.white:color2 ),
                      ),
                    ),
-                 ),
-               ],
+                 ],
+               ),
              ),
-           ),
-         ),
+           );
+         },
        );
      }
    }

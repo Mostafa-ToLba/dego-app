@@ -1,0 +1,25 @@
+
+{
+  "Home": "Home",
+  "Trending": "Trending",
+  "Downloads": "Downloads",
+  "Bookmark": "Bookmark",
+  "All": "All",
+  "Save": "Save",
+  "Share": "Share",
+  "More": "More",
+  "Settings": "Settings",
+  "Version": "version",
+  "Notifications": "Notices",
+  "nightMode": "Night mode",
+  "Sounds": "Sounds",
+  "Language": "Language",
+  "shareApp": "Share app",
+  "rateApp": "Rate app",
+  "contactUs": "Contact us",
+  "privacyPolicy": "Privacy policy",
+  "savedVideos": "You don't have any saved videos",
+  "downloadedVideos": "You don't have any downloaded videos",
+  "download": "downloaded successfully",
+  "search": "Search for favorite videos"
+}

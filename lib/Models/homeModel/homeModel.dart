@@ -1,17 +1,32 @@
 
 class HomeModel{
-  String? ph;
-  HomeModel({this.ph,});
+  String? photo;
+  String? video;
+  String? text;
+  int? likes ;
+  int? views ;
+  String? docId;
+  HomeModel({this.photo,this.video,this.text,this.likes,this.docId,this.views});
 
   HomeModel.fromJson(Map<String,dynamic>json)
   {
-    ph=json['ph'];
+    photo=json['photo'];
+    video=json['video'];
+    text=json['text'];
+    likes=json['likes'];
+    docId=json['docId'];
+    views=json['views'];
   }
 
   Map<String,dynamic>toMap()
   {
     return {
-      'ph':ph,
+      'photo':photo,
+      'video':video,
+      'text':text,
+      'likes':likes,
+      'docId':docId,
+      'views':views,
     };
   }
 
