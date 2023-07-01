@@ -116,7 +116,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
                     cursorColor: Colors.grey,
                   ),
                   fontFamily: translator.activeLanguageCode=='en'?engFont:arbFont,
-                  appBarTheme:  AppBarTheme(elevation: 1,
+                  appBarTheme:  AppBarTheme(elevation: 0,
                     iconTheme: IconThemeData(color: color2),
                   ),
                   primarySwatch: createMaterialColor(color1),

@@ -11,6 +11,7 @@ import 'package:firestore_search/firestore_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
 import 'package:sizer/sizer.dart';
 
@@ -140,6 +141,14 @@ class SearchScreen extends StatefulWidget {
        height: 24.h,
        width: double.infinity,
        decoration: BoxDecoration(
+         gradient: LinearGradient(
+           begin: Alignment.bottomCenter,
+           end: Alignment.center,stops: const [ 0.0, 0.7,],
+           colors: [
+             HexColor('#949292'),
+             HexColor('#ededed'),
+           ],
+         ),
            borderRadius: BorderRadius.circular(20.sp),
            image:DecorationImage(fit: BoxFit.cover,image: NetworkImage(searchedForText.ph.toString()))),
      ),

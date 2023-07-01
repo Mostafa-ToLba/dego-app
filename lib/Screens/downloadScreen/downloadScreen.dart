@@ -13,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
 import 'package:sizer/sizer.dart';
 import '../../AppCubit/appCubit.dart';
@@ -134,6 +135,14 @@ Widget DownloadWidget(Map<String, dynamic> downloadedVideosList, BuildContext co
       height: 24.h,
       width: double.infinity,
       decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.bottomCenter,
+          end: Alignment.center,stops: const [ 0.0, 0.7,],
+          colors: [
+            HexColor('#949292'),
+            HexColor('#ededed'),
+          ],
+        ),
           borderRadius: BorderRadius.circular(20.sp),
           image:DecorationImage(fit: BoxFit.cover,image: CachedNetworkImageProvider('${downloadedVideosList['downloadPhoto']}'))),
     ),
@@ -153,6 +162,7 @@ Widget DownloadWidget(Map<String, dynamic> downloadedVideosList, BuildContext co
             height: 28.sp,
             image: const AssetImage('assets/images/play.png',),color: Colors.white),
         onPressed: () {
+          AppCubit.get(context).visible=false;
           AppCubit.get(context).soundsFunc();
           navigateTo(context, BookmarkVideo(downloadedVideosList['downloadVideo'],downloadedVideosList['downloadPhoto'],downloadedVideosList['downloadTitle'],));
         },),

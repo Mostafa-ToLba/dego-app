@@ -15,6 +15,7 @@ import 'package:dego/Shared/constans/constans.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
 import 'package:paginate_firestore/paginate_firestore.dart';
 import 'package:sizer/sizer.dart';
@@ -37,7 +38,7 @@ class TrendingScreen extends StatefulWidget {
            ? AppCubit.get(context).bannarAdNumber
            : 'ca-app-pub-9120321344983600/4388505138',
        size: AdSize.banner,
-       request: AdRequest(),
+       request: const AdRequest(),
        listener: BannerAdListener(
          onAdLoaded: (_) {
            setState(() {
@@ -165,7 +166,17 @@ class TrendingScreen extends StatefulWidget {
          navigateTo(context, VideoOpen(trendingList.video!,trendingList.docId!,trendingList.likes!,trendingList.text!,trendingList.photo!,index));
        },
        child: Container(
-         decoration: BoxDecoration(color: AppCubit.get(context).isDark?Colors.black:Colors.white,image: DecorationImage(image: CachedNetworkImageProvider('${trendingList.photo}',),fit: BoxFit.cover)),
+         decoration: BoxDecoration(color: AppCubit.get(context).isDark?Colors.black:Colors.white,
+             gradient: AppCubit.get(context).isDark==false?LinearGradient(
+               begin: Alignment.bottomCenter,
+               end: Alignment.center,stops: const [ 0.0, 0.4,],
+               colors: [
+                 HexColor('#949292'),
+                 HexColor('#ededed'),
+               ],
+             ):null,
+             image: DecorationImage(image: CachedNetworkImageProvider('${trendingList.photo}',),fit: BoxFit.cover)
+         ),
          child: Align(
            alignment: Alignment.bottomRight,
            child: Padding(

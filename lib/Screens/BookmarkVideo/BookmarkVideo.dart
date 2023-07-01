@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:localize_and_translate/localize_and_translate.dart';
 import 'package:marquee/marquee.dart';
 import 'package:sizer/sizer.dart';
 
@@ -98,7 +99,7 @@ class BookmarkVideo extends StatefulWidget {
                    controller: _betterPlayerController,
                  ),
                  Positioned(
-                   bottom: 9.h,
+                   bottom: 10.3.h,
                    right: 6.w,
                    child: SizedBox(
                      width: 60.w,
@@ -118,65 +119,54 @@ class BookmarkVideo extends StatefulWidget {
                        decelerationCurve: Curves.easeOut,
                      ),
                    ),),
-                 /*
                  Positioned(
-                   bottom: 8.h,
+                   bottom: 10.h,
                    left: 6.w,
                    child: Column(
                      children:
                      [
-                       GestureDetector(
-                           onTap: ()
-                           {
-                             if(AppCubit.get(context).isItInFav(video:widget.video))
-                             {
-                               AppCubit.get(context).deleteDataFromDatabase(video:widget.video);
-                               AppCubit.get(context).removeLoveFunction(widget.docId);
-                             }
-                             else
-                             {
-                               AppCubit.get(context).insertToDatabase(video:widget.savedVideo);
-                               AppCubit.get(context).loveFunction(widget.docId);
-                             }
-                           },
-                           child: Image(fit: BoxFit.cover,image:  const AssetImage('assets/images/heart.png'),color:
-                           AppCubit.get(context).isItInFav(video:widget.video)?Colors.red:Colors.white,height: 22.sp)),
-                       SizedBox(height: 1.h),
-                       Text('${widget.likes}',style: TextStyle(fontSize: 11.sp,color: Colors.white,fontWeight: FontWeight.w600),),
-                       SizedBox(height: 1.5.h),
                        InkWell(
                            onTap: ()
                            {
-                             if( AppCubit.get(context).IsSavedVideosInDatabaseList.containsValue(widget.video))
-                               AppCubit.get(context).deleteDataFromDatabaseForSavedVideos(savedVideo: widget.video);
+                             if(AppCubit.get(context).visible)
+                             {
+                               if( AppCubit.get(context).IsSavedVideosInDatabaseList.containsValue(widget.savedVideo))
+                                 AppCubit.get(context).deleteDataFromDatabaseForSavedVideos(savedVideo: widget.savedVideo);
+                               else
+                                 AppCubit.get(context).insertToDatabaseForSavedVideos(saveVideo: widget.savedVideo,photo:widget.savedPhoto,
+                                     title: widget.savedText);
+                             }
                              else
-                               AppCubit.get(context).insertToDatabaseForSavedVideos(saveVideo: widget.video,photo:widget.photo,
-                                   title: widget.text);
+                               AppCubit.get(context).deleteDataFromDatabaseForDownloadVideos(downloadVideo: widget.savedVideo );
                            },
-                           child: Image(fit: BoxFit.cover,image: const AssetImage('assets/images/bookmark.png'),
-                               color:AppCubit.get(context).IsSavedVideosInDatabaseList.containsValue(widget.video)?
-                               Colors.yellow:Colors.white,height: 22.sp)),
+                           child: Image(fit: BoxFit.cover,image:AppCubit.get(context).visible?AssetImage('assets/images/bookmark.png')
+                               :AssetImage('assets/images/trash.png'),
+                               color:AppCubit.get(context).visible?AppCubit.get(context).IsSavedVideosInDatabaseList.containsValue(widget.savedVideo)?
+                               Colors.yellow:Colors.white:Colors.white,height: 22.sp)),
                        SizedBox(height: 1.h),
-                       Text('Save',style: TextStyle(fontSize: 11.sp,color: Colors.white,fontWeight: FontWeight.w600),),
+                       AppCubit.get(context).visible?Text('Save'.tr(),style: TextStyle(fontSize: 11.sp,color: Colors.white,fontWeight: FontWeight.w600),):
+                       Text('Delete'.tr(),style: TextStyle(fontSize: 11.sp,color: Colors.white,fontWeight: FontWeight.w600),),
                        SizedBox(height: 1.5.h),
                        InkWell(
-                           onTap: (){},
+                           onTap: AppCubit.get(context).progresss==0 && AppCubit.get(context).circle==0?()
+                           {
+                             AppCubit.get(context).startShare(video: widget.savedVideo,context: context);
+                           }:null,
                            child: Image(fit: BoxFit.cover,image: const AssetImage('assets/images/forward.png'),color: Colors.white,height: 22.sp)),
                        SizedBox(height: 1.h),
-                       Text('Share',style: TextStyle(fontSize: 11.sp,color: Colors.white,fontWeight: FontWeight.w600),),
+                       Text('Share'.tr(),style: TextStyle(fontSize: 11.sp,color: Colors.white,fontWeight: FontWeight.w600),),
                        SizedBox(height: 1.5.h),
                        InkWell(
                            onTap: ()
                            {
-                             print('sdsadasdasdsaaaaaaaa');
+                             AppCubit.get(context).showBottomSheet2(context,widget.savedVideo,widget.savedPhoto,widget.savedText);
                            },
                            child: Image(fit: BoxFit.cover,image: const AssetImage('assets/images/more.png'),color: Colors.white,height: 22.sp)),
                        SizedBox(height: 0.h),
-                       Text('more',style: TextStyle(fontSize: 11.sp,color: Colors.white,fontWeight: FontWeight.w600),),
+                       Text('More'.tr(),style: TextStyle(fontSize: 11.sp,color: Colors.white,fontWeight: FontWeight.w600),),
                      ],
                    ),
                  ),
-                  */
                  Align(
                    alignment: Alignment.bottomCenter,
                    child: _isBottomBannerAdLoaded? Container(
@@ -197,6 +187,21 @@ class BookmarkVideo extends StatefulWidget {
                            Navigator.pop(context);
                          },
                          child: Image(image: AssetImage('assets/images/arrow-left.png'),height: 5.h,color: Colors.white,))),
+                 if(AppCubit.get(context).circle != 0 || AppCubit.get(context).progresss != 0)
+                   Positioned(
+                       bottom: 33.h,
+                       right: 35.w,
+                       child: SizedBox(
+                         height: 13.h,
+                         width: 25.w,
+                         child: const Image(image: AssetImage('assets/images/load.png',),color: Colors.white,),)),
+                 if(AppCubit.get(context).circle != 0 || AppCubit.get(context).progresss != 0)
+                   Positioned(
+                       bottom: 36.5.h,
+                       right: 46.5.w,
+                       child: Text(AppCubit.get(context).circle!=0?
+                       (AppCubit.get(context).circle * 100).toStringAsFixed(1):(AppCubit.get(context).progresss * 100).toStringAsFixed(1),
+                         style: TextStyle(fontSize: 13.sp,color: Colors.white,fontWeight: FontWeight.w600),)),
                ],
              ),
            ),

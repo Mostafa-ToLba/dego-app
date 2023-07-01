@@ -679,7 +679,7 @@ class AppCubit extends Cubit<AppCubitStates> {
                         style: TextStyle(
                             fontWeight: FontWeight.w700, fontSize: 10.sp)),
                     SizedBox(width: 1.sp),
-                    Text(" 1.0.1",
+                    Text(" 1.0.2",
                         style: TextStyle(
                             fontWeight: FontWeight.w500, fontSize: 10.sp)),
                   ],
@@ -1040,7 +1040,7 @@ class AppCubit extends Cubit<AppCubitStates> {
 
   //google ads
 
-  String bannarAdNumber='ca-app-pub-3940256099942544/6300978111';
+  String bannarAdNumber='ca-app-pub-9120321344983600/4388505138';
   String interstitialAdNumber='ca-app-pub-3940256099942544/1033173712';
   String openAdNumber='ca-app-pub-3940256099942544/3419835294';
   late AppOpenAd  appOpenAd ;
@@ -1141,4 +1141,6 @@ class AppCubit extends Cubit<AppCubitStates> {
       ),
     );
   }
+
+  bool visible =true;
 }

@@ -15,6 +15,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
 import 'package:sizer/sizer.dart';
 
@@ -141,7 +142,16 @@ class _BookmarkScreenState extends State<BookmarkScreen> {
         width: double.infinity,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20.sp),
-            image:DecorationImage(fit: BoxFit.cover,image: CachedNetworkImageProvider('${savedVideosList['photo']}'))),
+            gradient: LinearGradient(
+              begin: Alignment.bottomCenter,
+              end: Alignment.center,stops: const [ 0.0, 0.7,],
+              colors: [
+                HexColor('#949292'),
+                HexColor('#ededed'),
+              ],
+            ),
+            image:DecorationImage(fit: BoxFit.cover,image: CachedNetworkImageProvider('${savedVideosList['photo']}'))
+        ),
       ),
       Positioned(
         top: .5.h,left: 1.w,
@@ -159,6 +169,7 @@ class _BookmarkScreenState extends State<BookmarkScreen> {
               height: 28.sp,
               image: const AssetImage('assets/images/play.png',),color: Colors.white),
           onPressed: () {
+            AppCubit.get(context).visible=true;
             AppCubit.get(context).soundsFunc();
             navigateTo(context, BookmarkVideo(savedVideosList['savedVideos'],savedVideosList['photo'],savedVideosList['title'],));
           },),
