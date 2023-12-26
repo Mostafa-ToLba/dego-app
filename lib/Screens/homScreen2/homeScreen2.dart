@@ -188,7 +188,8 @@ class HomeScreen2 extends StatefulWidget {
                        ? Colors.black
                        : Colors.white,
                        height: _bottomBannerAd.size.height.toDouble(),
-                       width: _bottomBannerAd.size.width.toDouble(),
+                    //   width: _bottomBannerAd.size.width.toDouble(),
+                       width: double.infinity,
                        child: AdWidget(ad: _bottomBannerAd),
                      ):Container(),
                    ),
@@ -260,7 +261,7 @@ class HomeScreen2 extends StatefulWidget {
                controller: _betterPlayerController,
              ),
              Positioned(
-               bottom: 8.h,
+               bottom: 9.h,
                left: translator.isDirectionRTL(context)?5.w:6.w,
                child: Column(
                  children:
@@ -347,7 +348,7 @@ class HomeScreen2 extends StatefulWidget {
                ),
              ),
              Positioned(
-               bottom: 10.h,
+               bottom: 11.h,
                right: 6.w,
                child: SizedBox(
                  width: 60.w,

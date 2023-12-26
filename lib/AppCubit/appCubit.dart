@@ -3,7 +3,6 @@
 import 'dart:async';
 import 'dart:io';
 import 'dart:math';
-
 import 'package:audioplayers/audioplayers.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dego/AppCubit/appCubitStates.dart';
@@ -679,7 +678,7 @@ class AppCubit extends Cubit<AppCubitStates> {
                         style: TextStyle(
                             fontWeight: FontWeight.w700, fontSize: 10.sp)),
                     SizedBox(width: 1.sp),
-                    Text(" 1.0.2",
+                    Text(" 1.0.3",
                         style: TextStyle(
                             fontWeight: FontWeight.w500, fontSize: 10.sp)),
                   ],
